@@ -1,4 +1,4 @@
-package mj;
+package other;
 
 import java.util.Arrays;
 // method: 统计
