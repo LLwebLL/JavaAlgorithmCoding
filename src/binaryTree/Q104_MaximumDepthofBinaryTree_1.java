@@ -1,4 +1,4 @@
-package tree;
+package binaryTree;
 import java.util.Queue;
 import java.util.LinkedList;
 public class Q104_MaximumDepthofBinaryTree_1 {

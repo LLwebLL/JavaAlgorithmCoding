@@ -1,4 +1,4 @@
-package tree;
+package binaryTree;
 
 public class Q100_SameTree_1 {
 	  public class TreeNode {

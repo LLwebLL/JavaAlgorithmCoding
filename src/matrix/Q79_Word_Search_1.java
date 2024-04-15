@@ -1,44 +1,38 @@
 package matrix;
 
 public class Q79_Word_Search_1 {
+	//O(MN⋅3L)，O(MN) DFS
+	class Solution {
+	    int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 	    public boolean exist(char[][] board, String word) {
-	        int h = board.length, w = board[0].length;
-	        boolean[][] visited = new boolean[h][w];
-	        for (int i = 0; i < h; i++) {
-	            for (int j = 0; j < w; j++) {
-	                boolean flag = check(board, visited, i, j, word, 0);
-	                if (flag) {
-	                    return true;
-	                }
+	    	int r = board.length, c = board[0].length;  
+	        boolean[][] v = new boolean[r][c];
+	        for (int i = 0; i < r; i++) {
+	        	for (int j = 0; j < c; j++) {
+	        		if( dfs(board,v, i,j, word,0)) return true;
 	            }
 	        }
 	        return false;
 	    }
-
-	    public boolean check(char[][] board, boolean[][] visited, int i, int j, String s, int k) {
-	        if (board[i][j] != s.charAt(k)) {
-	            return false;
-	        } else if (k == s.length() - 1) {
-	            return true;
-	        }
-	        visited[i][j] = true;
-	        int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+	    public boolean dfs(char[][] board,boolean[][] v,int i, int j, String s, int index){
+	        if (board[i][j]!= s.charAt(index)) return false;
+	        else if (index == s.length()-1) return true;
+	        v[i][j]=true;
 	        boolean result = false;
-	        for (int[] dir : directions) {
-	            int newi = i + dir[0], newj = j + dir[1];
-	            if (newi >= 0 && newi < board.length && newj >= 0 && newj < board[0].length) {
-	                if (!visited[newi][newj]) {
-	                    boolean flag = check(board, visited, newi, newj, s, k + 1);
-	                    if (flag) {
-	                        result = true;
-	                        break;
+	        for(int[] d: directions){
+	            int newi = i+d[0],  newj = d[1]+j;
+	            if(newi>=0&& newi<board.length&&newj>=0&& newj<board[0].length&&!v[newi][newj]){
+	                    if(dfs(board,v,newi,newj,s,index+1)){
+	                         result=true;
+	                         break; 
 	                    }
-	                }
 	            }
-	        }
-	        visited[i][j] = false;
-	        return result;
+	        } 
+	       v[i][j]=false;
+	       return result;
 	    }
 	}
+}
+
 
 

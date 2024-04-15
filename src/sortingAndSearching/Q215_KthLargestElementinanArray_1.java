@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
-//Method1: sort (没必要了)
+//Method1: sort (no need)
 //Time:O(nlog n)
 public class Q215_KthLargestElementinanArray_1 {
 		public int findKthLargest(int[] nums, int k) {
@@ -38,38 +38,16 @@ public class Q215_KthLargestElementinanArray_1 {
 	            else
 	                equal.add(num);
 	        }
-	        // 第 k 大元素在 big 中，递归划分
+	        // kth biggest in the big 
 	        if (k <= big.size())
 	            return quickSelect(big, k);
-	        // 第 k 大元素在 small 中，递归划分
+	        // h biggest in the small 
 	        if (nums.size() - small.size() < k)
 	            return quickSelect(small, k - nums.size() + small.size());
-	        // 第 k 大元素在 equal 中，直接返回 pivot
+	        // h biggest in the equal return pivot 
 	        return pivot;
 	    }
-
-	    
-class solution{
-    int quickselect(int[] nums, int l, int r, int k) {
-        if (l == r) return nums[k];
-        int x = nums[l], i = l - 1, j = r + 1;
-        while (i < j) {
-            do i++; while (nums[i] < x);
-            do j--; while (nums[j] > x);
-            if (i < j){
-                int tmp = nums[i];
-                nums[i] = nums[j];
-                nums[j] = tmp;
-            }
-        }
-        if (k <= j) return quickselect(nums, l, j, k);
-        else return quickselect(nums, j + 1, r, k);
-    }
-    public int findKthLargest(int[] _nums, int k) {
-        int n = _nums.length;
-        return quickselect(_nums, 0, n - 1, n - k);
-    }
-}}
+}
 
 
 
